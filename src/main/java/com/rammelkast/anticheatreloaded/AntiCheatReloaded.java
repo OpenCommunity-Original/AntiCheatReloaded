@@ -25,9 +25,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.bstats.bukkit.Metrics;
-import org.bstats.charts.SimplePie;
-import org.bstats.charts.SingleLineChart;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -160,52 +157,6 @@ public final class AntiCheatReloaded extends JavaPlugin {
 
 		// End tests
 		verboseLog("Finished loading.");
-
-		// Metrics
-		getServer().getScheduler().runTaskLater(this, new Runnable() {
-			@Override
-			public void run() {
-				checkForSymbiosis();
-				try {
-					final Metrics metrics = new Metrics(AntiCheatReloaded.this, 202);
-					metrics.addCustomChart(new SingleLineChart("cheaters_kicked", new Callable<Integer>() {
-						@Override
-						public Integer call() throws Exception {
-							final int kicked = playersKicked;
-							// Reset so we don't keep sending the same value
-							playersKicked = 0;
-							return kicked;
-						}
-					}));
-					metrics.addCustomChart(new SimplePie("protocollib_version", new Callable<String>() {
-						@Override
-						public String call() throws Exception {
-							return Bukkit.getPluginManager().getPlugin("ProtocolLib").getDescription().getVersion();
-						}
-					}));
-					metrics.addCustomChart(new SimplePie("nms_version", new Callable<String>() {
-						@Override
-						public String call() throws Exception {
-							return VersionUtil.getVersion();
-						}
-					}));
-					metrics.addCustomChart(new SimplePie("symbiosis", new Callable<String>() {
-						@Override
-						public String call() throws Exception {
-							return symbiosisMetric;
-						}
-					}));
-					metrics.addCustomChart(new SimplePie("floodgate_enabled", new Callable<String>() {
-						@Override
-						public String call() throws Exception {
-							return floodgateEnabled ? "Yes" : "No";
-						}
-					}));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}, 90L);
 	}
 
 	@Override

@@ -55,10 +55,6 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <relocations>
                                 <relocation>
-                                    <pattern>org.bstats</pattern>
-                                    <shadedPattern>com.rammelkast.anticheatreloaded.util</shadedPattern>
-                                </relocation>
-                                <relocation>
                                     <pattern>com.cryptomorin.xseries</pattern>
                                     <shadedPattern>com.rammelkast.anticheatreloaded.util</shadedPattern>
                                 </relocation>
@@ -115,12 +111,6 @@
             <artifactId>api</artifactId>
             <version>2.0-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.bstats</groupId>
-            <artifactId>bstats-bukkit</artifactId>
-            <version>2.2.1</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
